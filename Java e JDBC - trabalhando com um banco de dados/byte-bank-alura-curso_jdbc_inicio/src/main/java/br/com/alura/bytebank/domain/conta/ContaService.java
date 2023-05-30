@@ -2,12 +2,9 @@ package br.com.alura.bytebank.domain.conta;
 
 import br.com.alura.bytebank.ConnectionFactory;
 import br.com.alura.bytebank.domain.RegraDeNegocioException;
-import br.com.alura.bytebank.domain.cliente.Cliente;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +18,19 @@ public class ContaService {
     }
 
     public Set<Conta> listarContasAbertas() {
-        return contas;
+        Connection conn = connection.recuperarConecao();
+        return new ContaDAO(conn).listar();
+    }
+
+    public Conta buscarContaPorNumero(Integer numero) {
+
+        Connection conn = connection.recuperarConecao();
+        Conta conta = new ContaDAO(conn).listarPorNumero(numero);
+        if(conta != null) {
+            return conta;
+        } else {
+            throw new RegraDeNegocioException("Não existe conta cadastrada com esse número!");
+        }
     }
 
     public BigDecimal consultarSaldo(Integer numeroDaConta) {
@@ -63,13 +72,5 @@ public class ContaService {
         }
 
         contas.remove(conta);
-    }
-
-    private Conta buscarContaPorNumero(Integer numero) {
-        return contas
-                .stream()
-                .filter(c -> c.getNumero() == numero)
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Não existe conta cadastrada com esse número!"));
     }
 }

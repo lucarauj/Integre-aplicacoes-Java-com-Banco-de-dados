@@ -2,7 +2,7 @@
 
 ## Java e JDBC: trabalhando com um banco de dados
 
-### Criando e populando um database:
+### Criando e populando uma tabela:
 
 ```
 CREATE TABLE conta (
@@ -23,3 +23,18 @@ CREATE TABLE conta (
     <version>42.6.0</version>
 </dependency>
 ```
+
+### Factory Pattern:
+
+- Padrão reconhecido e útil em vários contextos. Recomenda-se utilizá-lo para a criação de objetos.
+
+### Exceções:
+
+- Checked: herdam diretamente da classe Exception. São verificadas em tempo de compilação e precisam de tratamento;
+- Unchecked: herdam de RuntimeException e são verificadas em tempo de execução;
+
+### SQL Injection:
+
+- Ataque cibernético que explora vulnerabilidades em sistemas de gerenciamento de banco de dados (DBMS) que não tratam adequadamente a entrada de dados fornecida pelos usuários;
+- Statement x PreparedStatement: é recomendado usar o PreparedStatement já que ele automaticamente evita a SQL Injection;
+

@@ -38,7 +38,7 @@ public class BytebankApplication {
                 }
             } catch (RegraDeNegocioException e) {
                 System.out.println("Erro: " +e.getMessage());
-                System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu");
+                System.out.println("Pressione qualquer tecla e dê ENTER para voltar ao menu");
                 teclado.next();
             }
             opcao = exibirMenu();

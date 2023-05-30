@@ -1,7 +1,9 @@
 package br.com.alura.bytebank;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
@@ -9,9 +11,19 @@ public class ConnectionFactory {
     public Connection recuperarConecao() {
 
         try{
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/byte_bank?user=postgres&password=lucarauj");
+            return createDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private HikariDataSource createDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/byte_bank");
+        config.setUsername("postgres");
+        config.setPassword("lucarauj");
+        config.setMaximumPoolSize(10);
+
+        return new HikariDataSource(config);
     }
 }

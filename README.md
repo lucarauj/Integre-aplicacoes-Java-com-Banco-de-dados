@@ -1,8 +1,9 @@
-# Integre aplicações Java com Banco de dados
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/lucarauj/Integre-aplicacoes-Java-com-Banco-de-dados/blob/main/LICENSE)
 
-<br>
+<h1 align="center">Java e JDBC:</h1>
+<h2 align="center">Trabalhando com um banco de dados</h2>
 
-## Java e JDBC: trabalhando com um banco de dados
+<p align="center"><img width="400px" src="https://github.com/lucarauj/assets/blob/main/Java-JDBC.png" /></p>
 
 <br>
 
@@ -80,3 +81,10 @@ ALTER TABLE conta ADD COLUMN esta_ativa boolean DEFAULT true;
 ```
 
 <br>
+
+## 👨‍🎓 Aluno
+
+#### Lucas Araujo
+
+<a href="https://www.linkedin.com/in/lucarauj"><img alt="lucarauj | LinkdeIN" width="40px" src="https://user-images.githubusercontent.com/43545812/144035037-0f415fc7-9f96-4517-a370-ccc6e78a714b.png" /></a>
+

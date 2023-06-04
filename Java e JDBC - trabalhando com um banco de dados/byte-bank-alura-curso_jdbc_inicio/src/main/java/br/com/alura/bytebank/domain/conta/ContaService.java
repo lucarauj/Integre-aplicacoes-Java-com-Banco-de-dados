@@ -18,13 +18,13 @@ public class ContaService {
     }
 
     public Set<Conta> listarContasAbertas() {
-        Connection conn = connection.recuperarConecao();
+        Connection conn = connection.recuperarConexao();
         return new ContaDAO(conn).listar();
     }
 
     public Conta buscarContaPorNumero(Integer numero) {
 
-        Connection conn = connection.recuperarConecao();
+        Connection conn = connection.recuperarConexao();
         Conta conta = new ContaDAO(conn).listarPorNumero(numero);
         if(conta != null) {
             return conta;
@@ -39,7 +39,7 @@ public class ContaService {
     }
 
     public void abrir(DadosAberturaConta dadosDaConta) {
-        Connection conn = connection.recuperarConecao();
+        Connection conn = connection.recuperarConexao();
         new ContaDAO(conn).salvar(dadosDaConta);
     }
 
@@ -53,7 +53,10 @@ public class ContaService {
             throw new RegraDeNegocioException("Saldo insuficiente!");
         }
 
-        conta.sacar(valor);
+        BigDecimal novoValor = conta.getSaldo().subtract(valor);
+        Connection conn = connection.recuperarConexao();
+        alterar(conta, novoValor);
+
     }
 
     public void realizarDeposito(Integer numeroDaConta, BigDecimal valor) {
@@ -62,7 +65,9 @@ public class ContaService {
             throw new RegraDeNegocioException("Valor do deposito deve ser superior a zero!");
         }
 
-        conta.depositar(valor);
+        Connection conn = connection.recuperarConexao();
+        alterar(conta, valor);
+
     }
 
     public void encerrar(Integer numeroDaConta) {
@@ -72,5 +77,10 @@ public class ContaService {
         }
 
         contas.remove(conta);
+    }
+
+    private void alterar(Conta conta, BigDecimal valor) {
+        Connection conn = connection.recuperarConexao();
+        new ContaDAO(conn).alterar(conta.getNumero(), valor);
     }
 }

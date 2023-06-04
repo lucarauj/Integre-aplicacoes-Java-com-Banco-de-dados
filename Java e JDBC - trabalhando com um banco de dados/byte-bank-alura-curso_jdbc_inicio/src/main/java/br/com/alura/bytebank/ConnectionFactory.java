@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    public Connection recuperarConecao() {
+    public Connection recuperarConexao() {
 
         try{
             return createDataSource().getConnection();

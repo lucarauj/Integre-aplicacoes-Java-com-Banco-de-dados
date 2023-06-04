@@ -49,3 +49,8 @@ CREATE TABLE conta (
    <version>5.0.1</version>
 </dependency>
 ```
+
+### Rollback:
+
+- Garante a integridade dos dados e evita que alterações incorretas ou parcialmente concluídas sejam persistidas no banco de dados;
+

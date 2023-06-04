@@ -5,13 +5,11 @@ import br.com.alura.bytebank.domain.RegraDeNegocioException;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.util.HashSet;
 import java.util.Set;
 
 public class ContaService {
 
     private ConnectionFactory connection;
-    private Set<Conta> contas = new HashSet<>();
 
     public ContaService() {
         this.connection = new ConnectionFactory();
@@ -54,7 +52,6 @@ public class ContaService {
         }
 
         BigDecimal novoValor = conta.getSaldo().subtract(valor);
-        Connection conn = connection.recuperarConexao();
         alterar(conta, novoValor);
 
     }
@@ -66,7 +63,6 @@ public class ContaService {
         }
 
         BigDecimal novoValor = conta.getSaldo().add(valor);
-        Connection conn = connection.recuperarConexao();
         alterar(conta, novoValor);
 
     }
@@ -82,7 +78,8 @@ public class ContaService {
             throw new RegraDeNegocioException("Conta não pode ser encerrada pois ainda possui saldo!");
         }
 
-        contas.remove(conta);
+        Connection conn = connection.recuperarConexao();
+        new ContaDAO(conn).deletar(numeroDaConta);
     }
 
     private void alterar(Conta conta, BigDecimal valor) {
